@@ -1,0 +1,2 @@
+Number of distinct words: 9 
+List of distinct words: You cannot end a sentence with because i@s conjunction 

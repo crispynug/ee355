@@ -1,0 +1,2 @@
+Number of distinct words: 10 
+List of distinct words: You cannot end a sentence with because because. is conjunction 
