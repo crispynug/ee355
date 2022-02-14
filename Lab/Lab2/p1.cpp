@@ -24,6 +24,13 @@ class GradeBook{
 	private:
 		Grade gb[arr_length];
 	public:
+	   
+	   GradeBook(int grades[], string names[]){
+			for(int i = 0; i < arr_length; i++){
+				gb[i].set_grade(names[i],grades[i]);
+			}
+		};
+	   
 		void set_value(int grades[], string names[]){
 			for(int i = 0; i < arr_length; i++){
 				gb[i].set_grade(names[i],grades[i]);
@@ -90,8 +97,8 @@ int main(){
 	string names[8] = {"a","b","c","d","e","f","g","h"};
 
 	//Write your code here
-	GradeBook grade_book;
-	grade_book.set_value(grades,names);
+	GradeBook grade_book(grades,names);
+	//grade_book.set_value(grades,names);
 	grade_book.print_book();
 	grade_book.print_top(3);
 	grade_book.print_top(20);
