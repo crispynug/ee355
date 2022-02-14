@@ -38,27 +38,51 @@ class GradeBook{
 			return;
 		};
 		void print_top(int n){
-			if(n > 7){
+			//if greater than 7 just print whole grade book
+			if(n > arr_length -1){
+				cout<<"Error value too large printing whole gradebook: "<<endl; 
 				print_book();
 				return;
 			}
-			Grade* top_n = new Grade[n];
+							
+			Grade* top_n = new Grade[n]; //array for top_n students
+			int min_max = 0; //tracks minimum grade within top n
+			int loc = 0; //tracks location of minimum grade
+			//loop through whole grade book
 			for(int i = 0; i < arr_length; i++){
-				for(int j = 0; j < n; j++){
-					if(i < n){
-					//	top_n[i].grade = gb[i].grade;
-					//	top_n[i].name = gb[i].name;
-						break;
+				//put first n elements inside top_n
+				if(i < n){
+					top_n[i].set_grade(gb[i].name,gb[i].get_grade());
+					if(min_max < gb[i].get_grade()){
+						min_max = gb[i].get_grade();
+						loc = i;
 					}
-					if(top_n[j].get_grade() < gb[i].get_grade()){
-					//	top_n[j].grade = gb[i].grade;
-					//	top_n[j].name = gb[j].grade;
+				
+				}//after n elements, compare iteration to min value
+			 	else if(min_max < gb[i].get_grade()){
+					top_n[loc].set_grade(gb[i].name,gb[i].get_grade());
+					min_max = gb[i].get_grade();
+					}
+			
+				else continue; //if no new value in top_n conintue to next iteration
 
+				//refind mininum val within top_n if top_n changed
+				for(int j = 0; j < n; j++){
+					if(top_n[j].get_grade() < min_max){
+	
+						min_max = top_n[j].get_grade();
+						loc = j;
+			
 					}
+
 				}
 			}
-
-		}
+			//print out top_n
+			cout<<"Top "<< n << " Students: " << endl;
+			for(int i = 0; i < n; i++){
+				cout<<"Name: "<<top_n[i].name<<" Grade: "<<top_n[i].get_grade()<<endl;
+			}
+		};
 };
 
 int main(){
@@ -69,5 +93,7 @@ int main(){
 	GradeBook grade_book;
 	grade_book.set_value(grades,names);
 	grade_book.print_book();
+	grade_book.print_top(3);
+	grade_book.print_top(20);
 	return 0;
 }
